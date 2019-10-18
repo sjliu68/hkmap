@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <title>Add multiple geometries from one GeoJSON source</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3RvcDY4IiwiYSI6ImNqY2tqdmY5ZjN1c2kzM28zN3pncTkxc3kifQ.5O5ns1xgihc9i6XvQxCFJQ';
+    var map = new mapboxgl.Map({
+      container: "map",
+      // style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/satellite-streets-v9",
+      center: [114.05, 22.35],
+      zoom: 10
+    });
+
+    map.on('load', function () {
+      // Add a layer showing the state polygons.
+      map.addLayer({
+        'id': 'states-layer',
+        'type': 'fill',
+        'source': {
+          'type': 'geojson',
+          'data': 'https://shengjie.xyz/assets/landuse2018.geojson'
+        },
+        'paint': {
+          'fill-color': 'rgba(200, 100, 240, 0.4)',
+          'fill-outline-color': 'rgba(200, 100, 240, 1)'
+        }
+      });
+
+      // When a click event occurs on a feature in the states layer, open a popup at the
+      // location of the click, with description HTML from its properties.
+      map.on('click', 'states-layer', function (e) {
+        new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML(e.features[0].properties.GridcodeCl)
+          .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the states layer.
+      map.on('mouseenter', 'states-layer', function () {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on('mouseleave', 'states-layer', function () {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+  </script>
+
+</body>
+
+</html>
