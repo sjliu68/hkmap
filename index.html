@@ -45,7 +45,16 @@
           'data': 'https://shengjie.xyz/assets/landuse2018.geojson'
         },
         'paint': {
-          'fill-color': 'rgba(200, 100, 240, 0.4)',
+          // 'fill-color': 'rgba(200, 100, 240, 0.4)',
+          'fill-color': [
+            "step",
+            ["get", "DN"],
+            "#51bbd6",
+            1,
+            "#f1f075",
+            2,
+            "#f28cb1"
+          ],
           'fill-outline-color': 'rgba(200, 100, 240, 1)'
         }
       });
