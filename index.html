@@ -28,8 +28,8 @@
       container: "map",
       // style: "mapbox://styles/mapbox/streets-v11",
       style: "mapbox://styles/mapbox/satellite-streets-v9",
-      center: [114.05, 22.35],
-      zoom: 10
+      center: [4.4, 51.05],
+      zoom: 12
     });
 
     map.on('load', function () {
@@ -51,7 +51,7 @@
         'type': 'fill',
         'source': {
           'type': 'geojson',
-          'data': 'https://sjliu.me/hkmap/data/landuse2018.geojson'
+          'data': 'https://sjliu.me/hkmap/data/Brussels_geojson.geojson'
         },
         'paint': {
           // 'fill-color': 'rgba(200, 100, 240, 0.4)',
