@@ -58,11 +58,15 @@
           'fill-color': [
             "step",
             ["get", "DN"],
-            'rgba(10, 100, 240, 0.4)',
+            'rgba(10, 0, 0, 0.4)',
             3,
-            'rgba(50, 100, 240, 0.4)',
+            'rgba(60, 0, 0, 0.4)',
             10,
-            'rgba(200, 100, 240, 0.4)',
+            'rgba(100, 0, 0, 0.4)',
+            15,
+            'rgba(150, 0, 0, 0.4)',
+            20,
+            'rgba(200, 0, 0, 0.4)',
           ],
           // 'fill-outline-color': 'rgba(200, 100, 240, 0.8)'
           'fill-outline-color': [
@@ -81,7 +85,7 @@
       map.on('click', 'hk2018-layer', function (e) {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML(e.features[0].properties.GridcodeCl)
+          .setHTML(e.features[0].properties.DN)
           //.setHTML(e.features[0].properties.classClass)
           .addTo(map);
       });
